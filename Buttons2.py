@@ -6,6 +6,8 @@ from time import sleep
 def jog_left():
     angl=servo.angle
     angl -= 1
+    if angl <= -58:
+        angl = -58
     servo.angle=angl
     print("servo angle= ", servo.angle)
     sleep(.02)
@@ -13,6 +15,8 @@ def jog_left():
 def jog_right():
     angl=servo.angle
     angl += 1
+    if angl >= 58:
+        angl = 58
     servo.angle=angl
     print("servo angle= ", servo.angle)
     sleep(.02)
@@ -33,12 +37,14 @@ servo = AngularServo(18, min_angle=-60, max_angle=60,
                      frame_width=20/1000,
                      pin_factory=factory)
 
-while True:
-    if button_L.is_pressed:
-#        angl = servo.angle
-        jog_left()
-    elif button_R.is_pressed:
-#        angl = servo.angle
-        jog_right()
-    elif button_C.is_pressed:
-        center_rudder()
+try:
+    while True:
+        if button_L.is_pressed:
+            jog_left()
+        elif button_R.is_pressed:
+            jog_right()
+        elif button_C.is_pressed:
+            center_rudder()
+except KeyboardInterrupt:
+    exit
+        
