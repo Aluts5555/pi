@@ -1,7 +1,12 @@
 # Write your code here :-)
+import RPi.GPIO as GPIO
 from gpiozero import Button, AngularServo
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(18,GPIO.OUT)
 
 def jog_left():
     angl=servo.angle
@@ -10,7 +15,7 @@ def jog_left():
         angl = -58
     servo.angle=angl
     print("servo angle= ", servo.angle)
-    sleep(.02)
+    sleep(.1)
 
 def jog_right():
     angl=servo.angle
@@ -19,14 +24,14 @@ def jog_right():
         angl = 58
     servo.angle=angl
     print("servo angle= ", servo.angle)
-    sleep(.02)
+    sleep(.1)
 
 def center_rudder():
     servo.angle=0.
     print("servo angle= ", servo.angle)
+    sleep(.1)
 
 factory = PiGPIOFactory()
-#angl=0
 button_L = Button(24)
 button_R = Button(25)
 button_C = Button(27)
