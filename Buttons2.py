@@ -31,16 +31,18 @@ def center_rudder():
     print("servo angle= ", servo.angle)
     sleep(.1)
 
-factory = PiGPIOFactory()
+Factory = PiGPIOFactory()
 button_L = Button(24)
 button_R = Button(25)
 button_C = Button(27)
 
-servo = AngularServo(18, min_angle=-60, max_angle=60,
+servo = AngularServo(18, min_angle=60, max_angle=-60,
                      min_pulse_width=800/1000000,
-                     max_pulse_width=1900/1000000,
+                     max_pulse_width=1900
+                     
+                     /1000000,
                      frame_width=20/1000,
-                     pin_factory=factory)
+                     pin_factory=Factory)
 
 try:
     while True:
