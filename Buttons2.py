@@ -53,5 +53,7 @@ try:
         elif button_C.is_pressed:
             center_rudder()
 except KeyboardInterrupt:
-    exit
+    pass
+finally:
+    servo.close()
         
