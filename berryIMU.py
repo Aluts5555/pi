@@ -406,11 +406,10 @@ while True:
     time.sleep(0.05)
 
     #slow program down a bit, makes the output more readable
-    if(len(m_avg)) > 4:
+    if(len(m_avg)) > 54:
         m_avg.pop(0)
         mean_m_avg = mean(m_avg)
-#        print(mean_m_avg,"\r")
-        print("length= ", len(m_avg), "m_avg= ", m_avg,"\r")
+        print(mean_m_avg,"\r")
     else:
         continue
 #

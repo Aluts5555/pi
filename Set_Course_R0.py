@@ -107,7 +107,7 @@ def jog_left():
     if angl <= -58:
         angl = -58
     servo.angle=angl
-#    print("servo angle= ", servo.angle)
+    print("servo angle= ", servo.angle)
     sleep(.1)
 
 def jog_right():
@@ -116,14 +116,12 @@ def jog_right():
     if angl >= 58:
         angl = 58
     servo.angle=angl
-#    print("servo angle= ", servo.angle)
+    print("servo angle= ", servo.angle)
     sleep(.1)
 
 def center_rudder():
     servo.angle=0.
-#    print("servo angle= ", servo.angle)
-    Pseudo_Heading = 180
-
+    print("servo angle= ", servo.angle)
     sleep(.1)
 
 def kalmanFilterY ( accAngle, gyroRate, DT):
