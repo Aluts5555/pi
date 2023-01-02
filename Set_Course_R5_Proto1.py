@@ -30,11 +30,10 @@ from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
 from os import system
 
-logging.basicConfig (filename='logfile.log', encoding='utf-8', level=logging.DEBUG)
+#logging.basicConfig (filename='logfile.log', encoding='utf-8', level=logging.DEBUG)
 
-
-# system("sudo killall pigpiod")
-# system("sudo pigpiod")
+#system("sudo killall pigpiod")
+#system("sudo /usr/bin/pigpiod")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -104,7 +103,7 @@ def jog_left():
     if angl <= -58:
         angl = -58
     servo.angle = angl
-    print("angl= ", angl, "L-servo angle= ", servo.angle)
+#    print("angl= ", angl, "L-servo angle= ", servo.angle)
     sleep(.1)
 
 def jog_right():
@@ -113,14 +112,14 @@ def jog_right():
     if angl >= 58:
         angl = 58
     servo.angle = angl
-    print("angl= ", angl, "R-servo angle= ", servo.angle)
+#    print("angl= ", angl, "R-servo angle= ", servo.angle)
     sleep(.1)
 
 def center_rudder():
     global Course_Desired, angl
     servo.angle = 0.
     Course_Desired = mean_m_avg
-    print(Course_Desired, mean_m_avg)
+#    print(Course_Desired, mean_m_avg)
 #    sleep(.1)
 
 def kalmanFilterY(accAngle, gyroRate, DT):
@@ -434,23 +433,24 @@ try:
 #        sleep(0.1)
         if button_L.is_pressed:
             jog_left()
-            logging.debug('LEFT ----- angl: %d, servo angle: %d', angl, servo.angle)
+#           logging.debug('LEFT ----- angl: %d, servo angle: %d', angl, servo.angle)
 #            print("Course_Desired= ", Course_Desired, "mean_m_avg= ", mean_m_avg, "Course_Error= ", Course_Error, "\r")
         elif button_R.is_pressed:
             jog_right()
-            logging.debug('RIGHT ----- angl: %d, servo angle: %d', angl, servo.angle)
+#            logging.debug('RIGHT ----- angl: %d, servo angle: %d', angl, servo.angle)
 #            print("Course_Desired= ", Course_Desired, "mean_m_avg= ", mean_m_avg, "Course_Error= ", Course_Error, "\r")
         elif button_C.is_pressed:
-            logging.debug('CENTER    ----- angl: %d, servo angle: %d', angl, servo.angle)
-            print("Center Button Pressed")
+#            logging.debug('CENTER    ----- angl: %d, servo angle: %d', angl, servo.angle)
+#            print("Center Button Pressed")
             center_rudder()
         else:
             Course_Error = Course_Desired - mean_m_avg
-            logging.debug('LOGGING Course_Error %d, Course_Desired %d   ', Course_Error, Course_Desired)
+#            logging.debug('LOGGING Course_Error %d, Course_Desired %d   ', Course_Error, Course_Desired)
             #logging.debug('angl: %d, servo angle: %d', angl, servo.angle)
  #           print("Course_Desired= ", Course_Desired, "mean_m_avg= ", mean_m_avg, "Course_Error= " , Course_Error,"\r", "angl= ", angl)
             if Course_Error < 1 and Course_Error > -1:
-                print("AT CONTINUE STATEMENT")
+                continue
+#                print("AT CONTINUE STATEMENT")
             elif Course_Error >= 1 and Course_Error <= 40:
                 servo.angle = 1.0 * Course_Error
             elif Course_Error <= -1 and Course_Error >= -40:
@@ -460,7 +460,7 @@ try:
                 Course_Error = 40
             elif Course_Error < -40:
 #                print("Course_Desired= ", Course_Desired, "mean_m_avg= ", mean_m_avg, "Course_Error= " , Course_Error,"\r")
-                Course_Error = -40
+                 Course_Error = -40
 #            else:
 #                continue
 #                servo.angle += -.5 * Course_Error
